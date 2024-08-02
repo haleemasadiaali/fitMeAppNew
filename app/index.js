@@ -9,10 +9,10 @@ import { useRouter } from 'expo-router';
 export default function Index(){
     const router=useRouter();
     return(
-        <View className="flex-1 flex justify-end">
+        <View className="flex-1 flex justify-end " style={{backgroundColor:'black',height:'100%'}}>
            <StatusBar style="light"/>
            <Image className="h-full w-full absolute" source={require('../assets/images/getStarted.png')}/>
-        
+
            <LinearGradient
             colors={['transparent','#18181b']}
             style={{width:wp(100),height:hp(70)}}
@@ -40,7 +40,7 @@ export default function Index(){
                     </TouchableOpacity>
                 </Animated.View>
             </LinearGradient>
-           
+
         </View>
     )
 }
