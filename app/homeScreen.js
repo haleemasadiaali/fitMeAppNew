@@ -15,7 +15,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-// import ImageSlider from '../components/ImageSlider';
+import ImageSlider from '../components/ImageSlider';
 
 const HomeScreen = ({navigation}) => {
   const router=useRouter();
@@ -51,8 +51,8 @@ const HomeScreen = ({navigation}) => {
         </View>
       </View>
 
-
-        {/* <View>
+{/* 
+        <View>
                 <ImageSlider/>
       </View> */}
 

@@ -1,42 +1,38 @@
-import {View,Text,ScrollView,Image,TouchableOpacity} from 'react-native';
+import { View, Text, ScrollView, Image, SafeAreaView ,TouchableOpacity} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
+
 export default function Yoga() {
-    const router=useRouter();
-    const [loading, setLoading] = useState(true);
-    const [data, setData] = useState([]);
-    useEffect(() => {
-      fetchData();
-    }, []);
-    useEffect(() => {
-      if (data.length !== 0) {
-        setLoading(false);
-      }
-    }, [data]);
+  const router=useRouter();
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
 
-    const fetchData = async () => {
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-        try{
-
-            const data = await fetch('https://dvssholla.github.io/yogaApp/');
-            const json = await data.json();
-            setData(json["results"]);
-
-
-        } catch (error) {
-
-            console.log(error);
-
-        }
-
+  const fetchData = async () => {
+    try {
+      const data = await fetch('https://dvssholla.github.io/yogaApp/'); //don't do anything till the data is fetched
+      const json = await data.json(); // convert to json
+      setData(json["results"]);
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    return(
+  useEffect(() => {
+    if (data.length !== 0) {
+      setLoading(false);
+    }
+  }, [data]);
 
-      <ScrollView style={{ flex: 1,backgroundColor:'#1e1e1e'}}>
+  return (
+    <SafeAreaView style={{ flex: 1,backgroundColor:'#1e1e1e'}}>
+      <ScrollView style={{ flex: 1 }}>
 
       <TouchableOpacity
          onPress={()=>router.back()}
@@ -72,27 +68,21 @@ export default function Yoga() {
                   alignItems: 'center',
                   marginBottom:10
                 }}>
-            <View
+            {/* <View
               style={{width:wp(90),height:wp(70)}}
               className="flex justify-end p-4 mb-4"
             >
- <Image
+              <Image
                source={{ uri: value.picture }}
                resizeMode='cover'
                style={{width:wp(90),height:wp(70)}}
                className="rounded-[35px] absolute"
-             />
-             <LinearGradient
-             colors={['transparent','rgba(0,0,0,0.85)']}
-             style={{width:wp(90),height:hp(30)}}
-             start={{x:0.5,y:0}}
-             end={{x:0.5,y:1}}
-             className="absolute bottom-0 rounded-b-[35px]"
-             />
+             /> */}
+
              <Text style={{fontSize:hp(2.3),color:'#EDEDED'}} className=" font-semibold text-center tracking-wide">
-             {value.name.english}
+           {value.name.english}
              </Text>
-            </View>
+
             <Text
                   style={{
                     color: '#a2ed3a',
@@ -126,9 +116,19 @@ export default function Yoga() {
             </View>
           ))
         )}
+        <Text
+          style={{
+            color: '#a2ed3a',
+            fontSize: 10,
+            marginTop: '1%',
+            alignSelf: 'center',
+            marginBottom: '1%',
+            fontWeight:'bold'
+          }}>
+          Credit: Yoga Breeze Bali
+        </Text>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
-        </ScrollView>
-       
-    );
-
-}

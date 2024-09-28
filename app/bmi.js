@@ -2,9 +2,12 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity,
     StyleSheet } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useRouter } from 'expo-router';
 
 const App = () => {
-
+   const router = useRouter();
     const [height, setHeight] = useState('');
     const [weight, setWeight] = useState('');
     const [bmiResult, setBmiResult] = useState(null);
@@ -37,6 +40,14 @@ const App = () => {
 
     return (
         <View style={styles.container}>
+        <TouchableOpacity
+         onPress={()=>router.back()}
+         className=" mx-4 absolute flex justify-center items-center pr-1 rounded-full "
+         style={{height:hp(5.5), width:hp(5.5),backgroundColor:'#a2ed3a',marginTop:100}}
+        >
+          <Ionicons name="caret-back-outline" size={hp(4)} color="#131313" />
+      </TouchableOpacity>
+
             <Text style={styles.header}>
                 BMI Calculator
             </Text>
@@ -105,14 +116,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#1e1e1e',
-        alignItems: 'center',
-        justifyContent:'center'
+
     },
     header: {
         fontSize: 28,
         fontWeight: 'bold',
         color: '#a2ed3a',
         marginBottom: 20,
+        marginTop:150
     },
     form: {
         backgroundColor: '#131313',
@@ -120,6 +131,7 @@ const styles = StyleSheet.create({
         padding: 20,
         width: '90%',
         elevation: 5,
+        alignSelf:'center',
     },
     inputRow: {
         flexDirection: 'row',
